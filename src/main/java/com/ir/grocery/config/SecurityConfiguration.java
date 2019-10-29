@@ -11,11 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableConfigurationProperties
@@ -28,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                //.csrf().disable()
                 .authorizeRequests().antMatchers("/grocery/user/add").permitAll()
                 //.authorizeRequests().antMatchers("/*").permitAll()
                 .antMatchers("/**").authenticated()
@@ -37,9 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.cors();
 
-        http.requiresChannel()
-                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-                .requiresSecure();
+//        http.requiresChannel()
+//                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+//                .requiresSecure();
     }
 
     @Bean
@@ -52,17 +47,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         builder.userDetailsService(userDetailsService);
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource()
-    {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource()
+//    {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+//        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
+//        configuration.setAllowCredentials(true);
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
 }
