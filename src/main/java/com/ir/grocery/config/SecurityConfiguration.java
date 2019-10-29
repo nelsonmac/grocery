@@ -23,8 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                //.csrf().disable()
-                .authorizeRequests().antMatchers("/grocery/user/add").permitAll()
+                .csrf().disable()
+                .authorizeRequests().antMatchers("/grocery/user/login").permitAll()
                 //.authorizeRequests().antMatchers("/*").permitAll()
                 .antMatchers("/**").authenticated()
                 .and().httpBasic()
