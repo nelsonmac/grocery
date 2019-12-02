@@ -1,6 +1,8 @@
 package com.ir.grocery.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -8,7 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-
+@Getter
+@Setter
 @AllArgsConstructor
 @Document("price_history")
 public class PriceHistory {
@@ -23,6 +26,8 @@ public class PriceHistory {
     private Long price;
     private Date datetime;
     private Boolean isDeleted;
+
+    public PriceHistory(){}
 
     public PriceHistory(Item item, Long price){
 
